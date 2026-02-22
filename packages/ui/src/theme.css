@@ -1,0 +1,37 @@
+@theme {
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'IBM Plex Mono', monospace;
+
+  --color-bg-page: #0A0A0A;
+  --color-bg-grad-mid: #0A1A15;
+  --color-bg-grad-end: #0D2818;
+  --color-border-primary: #2a2a2a;
+  --color-text-heading: #FFFFFF;
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #6B7280;
+  --color-text-tertiary: #4B5563;
+  --color-accent-green: #10B981;
+  --color-accent-cyan: #06B6D4;
+  --color-accent-amber: #F59E0B;
+  --color-accent-red: #EF4444;
+  --color-btn-text: #0A0A0A;
+}
+
+:root.light {
+  --color-bg-page: #FAFAFA;
+  --color-bg-grad-mid: #F0FAF5;
+  --color-bg-grad-end: #E6F7EF;
+  --color-border-primary: #E5E7EB;
+  --color-text-heading: #111111;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #9CA3AF;
+  --color-text-tertiary: #D1D5DB;
+}
+
+body {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  background: linear-gradient(to bottom, var(--color-bg-page), var(--color-bg-grad-mid), var(--color-bg-grad-end));
+  min-height: 100vh;
+  color: var(--color-text-primary);
+}
