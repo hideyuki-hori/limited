@@ -2,8 +2,10 @@
 
 A countdown timer app that displays remaining time (down to the second) in real time.
 
-<img src="light.png" alt="Light" width="400">
-<img src="dark.png" alt="Dark" width="400">
+<p align="center">
+  <img src="light.png" alt="Light" width="400"><br>
+  <img src="dark.png" alt="Dark" width="400">
+</p>
 
 ## Features
 
