@@ -71,7 +71,7 @@ export function Header() {
         </div>
         <Show when={config.showExtensionLink}>
           <a
-            href="https://chromewebstore.google.com"
+            href="https://chromewebstore.google.com/detail/limited/aecdacgfdiefkkbialbpmgbnjficgmod"
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2"

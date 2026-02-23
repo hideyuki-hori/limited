@@ -12,7 +12,7 @@ A countdown timer app that displays remaining time (down to the second) in real 
 - Create countdowns with a title and deadline
 - Real-time display of remaining time down to the second
 - Save up to 10 countdowns
-- Available as both a web app and Chrome extension
+- Available as both a web app and [Chrome extension](https://chromewebstore.google.com/detail/limited/aecdacgfdiefkkbialbpmgbnjficgmod?authuser=0&hl=ja)
 
 ## Tech Stack
 
