@@ -52,18 +52,18 @@ export function DigitSelect(props: Props) {
         type="button"
         onClick={() => !singleOption() && setOpen(!open())}
         onKeyDown={handleKeyDown}
-        class="font-mono text-sm w-[18px] h-7 flex items-center justify-center transition-all rounded-sm"
+        class="font-mono text-sm w-4 h-7 flex items-center justify-center transition-all rounded-sm"
         classList={{
           'text-text-primary': !open(),
-          'text-accent-green bg-accent-green/10': open(),
-          'hover:text-accent-green hover:bg-accent-green/5 cursor-pointer': !singleOption(),
+          'text-accent bg-accent/10': open(),
+          'hover:text-accent hover:bg-accent/5 cursor-pointer': !singleOption(),
           'text-text-tertiary cursor-default': singleOption(),
         }}
       >
         {props.value}
       </button>
       <Show when={open()}>
-        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 flex flex-col border border-border-primary bg-bg-page/95 backdrop-blur-sm rounded-sm shadow-lg shadow-black/30 overflow-hidden">
+        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 flex flex-col border border-border-primary bg-bg-page/95 backdrop-blur-sm rounded-sm shadow-lg shadow-shadow-card overflow-hidden">
           <For each={props.options}>
             {opt => (
               <button
@@ -71,8 +71,8 @@ export function DigitSelect(props: Props) {
                 onClick={() => handleSelect(opt)}
                 class="font-mono text-sm w-7 h-7 flex items-center justify-center transition-colors"
                 classList={{
-                  'text-accent-green bg-accent-green/15': opt === props.value,
-                  'text-text-secondary hover:text-text-primary hover:bg-accent-green/5': opt !== props.value,
+                  'text-accent bg-accent/15': opt === props.value,
+                  'text-text-secondary hover:text-text-primary hover:bg-accent/5': opt !== props.value,
                 }}
               >
                 {opt}

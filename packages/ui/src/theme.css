@@ -1,31 +1,55 @@
 @theme {
+  --font-title: 'Shippori Mincho', serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-body: 'IBM Plex Mono', monospace;
 
-  --color-bg-page: #0A0A0A;
-  --color-bg-grad-mid: #0A1A15;
-  --color-bg-grad-end: #0D2818;
-  --color-border-primary: #2a2a2a;
-  --color-text-heading: #FFFFFF;
-  --color-text-primary: #FAFAFA;
-  --color-text-secondary: #6B7280;
-  --color-text-tertiary: #4B5563;
-  --color-accent-green: #10B981;
-  --color-accent-cyan: #06B6D4;
-  --color-accent-amber: #F59E0B;
-  --color-accent-red: #EF4444;
-  --color-btn-text: #0A0A0A;
+  --color-bg-page: #0A0A0F;
+  --color-bg-grad-mid: #0D0D14;
+  --color-bg-grad-end: #111118;
+  --color-bg-card: #161620;
+  --color-bg-surface: #0D0D12;
+  --color-border-primary: #2A2520;
+  --color-shadow-card: rgba(154, 132, 86, 0.2);
+  --color-border-card-active: rgba(154, 132, 86, 0.25);
+  --color-text-heading: #C4B89A;
+  --color-text-heading-dim: #8A7E66;
+  --color-text-primary: #C4B89A;
+  --color-text-secondary: #6B6252;
+  --color-text-tertiary: #554E3E;
+  --color-text-meta: #5E5648;
+  --color-accent: #9A8456;
+  --color-accent-bright: #B8A070;
+  --color-accent-dim: #7A6A42;
+  --color-progress-bg: #1A1814;
+  --color-progress-start: #8B7340;
+  --color-progress-end: #9A8456;
+  --color-btn-text: #0D0D12;
+  --color-separator: #2A2520;
 }
 
 :root.light {
-  --color-bg-page: #FAFAFA;
-  --color-bg-grad-mid: #F0FAF5;
-  --color-bg-grad-end: #E6F7EF;
-  --color-border-primary: #E5E7EB;
-  --color-text-heading: #111111;
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #9CA3AF;
-  --color-text-tertiary: #D1D5DB;
+  --color-bg-page: #F0F2F8;
+  --color-bg-grad-mid: #E0E4EE;
+  --color-bg-grad-end: #D8DCE8;
+  --color-bg-card: #FAFBFE;
+  --color-bg-surface: #FAFBFE;
+  --color-border-primary: rgba(0, 0, 0, 0.08);
+  --color-border-card-active: rgba(196, 30, 58, 0.19);
+  --color-shadow-card: rgba(208, 48, 80, 0.25);
+  --color-text-heading: #1A1A2E;
+  --color-text-heading-dim: #3A3A50;
+  --color-text-primary: #1A1A2E;
+  --color-text-secondary: #A0A4B0;
+  --color-text-tertiary: #C8CCD4;
+  --color-text-meta: #A8ADB8;
+  --color-accent: #C41E3A;
+  --color-accent-bright: #D03050;
+  --color-accent-dim: #8A1528;
+  --color-progress-bg: #E8E0E4;
+  --color-progress-start: #D03050;
+  --color-progress-end: #C41E3A;
+  --color-btn-text: #FFFFFF;
+  --color-separator: #E8E0E4;
 }
 
 body {

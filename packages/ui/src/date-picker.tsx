@@ -16,24 +16,37 @@ function daysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate()
 }
 
+function parseValue(v: string) {
+  const m = v.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/)
+  if (!m) return null
+  return { y: +m[1], mo: +m[2], d: +m[3], h: +m[4], mi: +m[5] }
+}
+
 export function DatePicker(props: Props) {
   const now = new Date()
-  const [yT, setYT] = createSignal(2)
-  const [yH, setYH] = createSignal(0)
-  const [yD, setYD] = createSignal(Math.floor((now.getFullYear() % 100) / 10))
-  const [yU, setYU] = createSignal(now.getFullYear() % 10)
+  const p = parseValue(props.value)
+  const initY = p?.y ?? now.getFullYear()
+  const initMo = p?.mo ?? (now.getMonth() + 1)
+  const initD = p?.d ?? now.getDate()
+  const initH = p?.h ?? 23
+  const initMi = p?.mi ?? 59
 
-  const [moT, setMoT] = createSignal(Math.floor((now.getMonth() + 1) / 10))
-  const [moU, setMoU] = createSignal((now.getMonth() + 1) % 10)
+  const [yT, setYT] = createSignal(Math.floor(initY / 1000))
+  const [yH, setYH] = createSignal(Math.floor((initY % 1000) / 100))
+  const [yD, setYD] = createSignal(Math.floor((initY % 100) / 10))
+  const [yU, setYU] = createSignal(initY % 10)
 
-  const [dT, setDT] = createSignal(Math.floor(now.getDate() / 10))
-  const [dU, setDU] = createSignal(now.getDate() % 10)
+  const [moT, setMoT] = createSignal(Math.floor(initMo / 10))
+  const [moU, setMoU] = createSignal(initMo % 10)
 
-  const [hT, setHT] = createSignal(2)
-  const [hU, setHU] = createSignal(3)
+  const [dT, setDT] = createSignal(Math.floor(initD / 10))
+  const [dU, setDU] = createSignal(initD % 10)
 
-  const [miT, setMiT] = createSignal(5)
-  const [miU, setMiU] = createSignal(9)
+  const [hT, setHT] = createSignal(Math.floor(initH / 10))
+  const [hU, setHU] = createSignal(initH % 10)
+
+  const [miT, setMiT] = createSignal(Math.floor(initMi / 10))
+  const [miU, setMiU] = createSignal(initMi % 10)
 
   const year = () => yT() * 1000 + yH() * 100 + yD() * 10 + yU()
   const month = () => moT() * 10 + moU()
@@ -89,21 +102,21 @@ export function DatePicker(props: Props) {
   })
 
   return (
-    <div class="flex items-center gap-0.5 font-mono text-sm">
+    <div class="flex items-center font-mono text-sm">
       <DigitSelect value={yT()} options={[2]} onChange={setYT} />
       <DigitSelect value={yH()} options={[0]} onChange={setYH} />
       <DigitSelect value={yD()} options={range(2, 9)} onChange={setYD} />
       <DigitSelect value={yU()} options={range(0, 9)} onChange={setYU} />
-      <span class="text-text-tertiary mx-0.5">-</span>
+      <span class="text-text-tertiary mx-px">-</span>
       <DigitSelect value={moT()} options={range(0, 1)} onChange={setMoT} />
       <DigitSelect value={moU()} options={moUOptions()} onChange={setMoU} />
-      <span class="text-text-tertiary mx-0.5">-</span>
+      <span class="text-text-tertiary mx-px">-</span>
       <DigitSelect value={dT()} options={dTOptions()} onChange={setDT} />
       <DigitSelect value={dU()} options={dUOptions()} onChange={setDU} />
-      <span class="text-text-secondary mx-1.5"> </span>
+      <span class="text-text-secondary mx-1"> </span>
       <DigitSelect value={hT()} options={range(0, 2)} onChange={setHT} />
       <DigitSelect value={hU()} options={hUOptions()} onChange={setHU} />
-      <span class="text-text-tertiary mx-0.5">:</span>
+      <span class="text-text-tertiary mx-px">:</span>
       <DigitSelect value={miT()} options={range(0, 5)} onChange={setMiT} />
       <DigitSelect value={miU()} options={range(0, 9)} onChange={setMiU} />
     </div>

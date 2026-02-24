@@ -9,7 +9,11 @@ function load(): Countdown[] {
   const raw = localStorage.getItem(STORAGE_KEY)
   if (!raw) return []
   try {
-    return JSON.parse(raw)
+    const items: Countdown[] = JSON.parse(raw)
+    return items.map(c => ({
+      ...c,
+      createdAt: c.createdAt || Date.now(),
+    }))
   } catch {
     return []
   }
@@ -24,12 +28,18 @@ export function loadCountdowns() {
   setLoaded(true)
 }
 
-async function addCountdown(title: string, deadline: number): Promise<boolean> {
+async function addCountdown(title: string, deadline: number, createdAt: number): Promise<boolean> {
   if (countdowns().length >= MAX_ITEMS) return false
-  const next = [...countdowns(), { id: generateId(), title, deadline }]
+  const next = [...countdowns(), { id: generateId(), title, deadline, createdAt }]
   setCountdowns(next)
   save(next)
   return true
+}
+
+async function updateCountdown(id: string, data: { title?: string; deadline?: number; createdAt?: number }) {
+  const next = countdowns().map(c => c.id === id ? { ...c, ...data } : c)
+  setCountdowns(next)
+  save(next)
 }
 
 async function removeCountdown(id: string) {
@@ -42,5 +52,6 @@ export const storeContext: StoreContext = {
   countdowns,
   loaded,
   addCountdown,
+  updateCountdown,
   removeCountdown,
 }

@@ -5,7 +5,8 @@ import type { Countdown } from './types'
 export interface StoreContext {
   countdowns: Accessor<Countdown[]>
   loaded: Accessor<boolean>
-  addCountdown: (title: string, deadline: number) => Promise<boolean>
+  addCountdown: (title: string, deadline: number, createdAt: number) => Promise<boolean>
+  updateCountdown: (id: string, data: { title?: string; deadline?: number; createdAt?: number }) => Promise<void>
   removeCountdown: (id: string) => Promise<void>
 }
 
