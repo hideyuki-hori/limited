@@ -2,7 +2,7 @@ export interface Countdown {
   id: string
   title: string
   deadline: number
-  createdAt: number
+  startedAt: number
 }
 
 export interface TimeRemaining {

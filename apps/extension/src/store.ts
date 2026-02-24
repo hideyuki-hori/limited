@@ -10,7 +10,7 @@ export async function loadCountdowns() {
   const items: Countdown[] = result[STORAGE_KEY] ?? []
   setCountdowns(items.map(c => ({
     ...c,
-    createdAt: c.createdAt || Date.now(),
+    startedAt: c.startedAt || Date.now(),
   })))
   setLoaded(true)
 }
@@ -19,15 +19,15 @@ async function save(items: Countdown[]) {
   await chrome.storage.local.set({ [STORAGE_KEY]: items })
 }
 
-async function addCountdown(title: string, deadline: number, createdAt: number): Promise<boolean> {
+async function addCountdown(title: string, deadline: number, startedAt: number): Promise<boolean> {
   if (countdowns().length >= MAX_ITEMS) return false
-  const next = [...countdowns(), { id: generateId(), title, deadline, createdAt }]
+  const next = [...countdowns(), { id: generateId(), title, deadline, startedAt }]
   setCountdowns(next)
   await save(next)
   return true
 }
 
-async function updateCountdown(id: string, data: { title?: string; deadline?: number; createdAt?: number }) {
+async function updateCountdown(id: string, data: { title?: string; deadline?: number; startedAt?: number }) {
   const next = countdowns().map(c => c.id === id ? { ...c, ...data } : c)
   setCountdowns(next)
   await save(next)

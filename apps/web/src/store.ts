@@ -12,7 +12,7 @@ function load(): Countdown[] {
     const items: Countdown[] = JSON.parse(raw)
     return items.map(c => ({
       ...c,
-      createdAt: c.createdAt || Date.now(),
+      startedAt: c.startedAt || Date.now(),
     }))
   } catch {
     return []
@@ -28,15 +28,15 @@ export function loadCountdowns() {
   setLoaded(true)
 }
 
-async function addCountdown(title: string, deadline: number, createdAt: number): Promise<boolean> {
+async function addCountdown(title: string, deadline: number, startedAt: number): Promise<boolean> {
   if (countdowns().length >= MAX_ITEMS) return false
-  const next = [...countdowns(), { id: generateId(), title, deadline, createdAt }]
+  const next = [...countdowns(), { id: generateId(), title, deadline, startedAt }]
   setCountdowns(next)
   save(next)
   return true
 }
 
-async function updateCountdown(id: string, data: { title?: string; deadline?: number; createdAt?: number }) {
+async function updateCountdown(id: string, data: { title?: string; deadline?: number; startedAt?: number }) {
   const next = countdowns().map(c => c.id === id ? { ...c, ...data } : c)
   setCountdowns(next)
   save(next)

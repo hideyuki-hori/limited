@@ -33,15 +33,15 @@ function CheckIcon() {
   )
 }
 
-function elapsedDays(createdAt: number): string {
-  const days = Math.floor((Date.now() - createdAt) / (1000 * 60 * 60 * 24))
+function elapsedDays(startedAt: number): string {
+  const days = Math.floor((Date.now() - startedAt) / (1000 * 60 * 60 * 24))
   return `${days}d elapsed`
 }
 
-function consumed(createdAt: number, deadline: number): number {
-  const total = deadline - createdAt
+function consumed(startedAt: number, deadline: number): number {
+  const total = deadline - startedAt
   if (total <= 0) return 100
-  const passed = Date.now() - createdAt
+  const passed = Date.now() - startedAt
   return Math.min(100, Math.max(0, Math.round((passed / total) * 100)))
 }
 
@@ -100,7 +100,7 @@ export function CountdownCard(props: Props) {
 
   function startEditing(e: MouseEvent) {
     e.stopPropagation()
-    setDraftStarted(formatDateISO(props.item.createdAt))
+    setDraftStarted(formatDateISO(props.item.startedAt))
     setDraftDeadline(formatDateISO(props.item.deadline))
     setEditing(true)
   }
@@ -110,7 +110,7 @@ export function CountdownCard(props: Props) {
     const sTs = new Date(draftStarted()).getTime()
     const dTs = new Date(draftDeadline()).getTime()
     if (!isNaN(sTs) && !isNaN(dTs) && sTs < dTs) {
-      updateCountdown(props.item.id, { createdAt: sTs, deadline: dTs })
+      updateCountdown(props.item.id, { startedAt: sTs, deadline: dTs })
     }
     setEditing(false)
   }
@@ -131,7 +131,7 @@ export function CountdownCard(props: Props) {
     ]
   }
 
-  const pct = () => consumed(props.item.createdAt, props.item.deadline)
+  const pct = () => consumed(props.item.startedAt, props.item.deadline)
 
   return (
     <div
@@ -207,7 +207,7 @@ export function CountdownCard(props: Props) {
             fallback={
               <div class="flex items-center justify-between">
                 <span class="font-body text-[10px] text-text-meta">
-                  started: {formatDate(props.item.createdAt)}
+                  started: {formatDate(props.item.startedAt)}
                 </span>
                 <span class="font-body text-[10px] text-text-meta">
                   deadline: {formatDate(props.item.deadline)}
@@ -236,7 +236,7 @@ export function CountdownCard(props: Props) {
       <div class="flex items-center justify-between px-6 pt-3 mt-[18px] border-t border-separator">
         <div class="flex items-center gap-1.5 text-text-secondary">
           <TimerIcon />
-          <span class="font-body text-[10px]">{elapsedDays(props.item.createdAt)}</span>
+          <span class="font-body text-[10px]">{elapsedDays(props.item.startedAt)}</span>
         </div>
         <div class="flex items-center gap-2.5">
           <Show
