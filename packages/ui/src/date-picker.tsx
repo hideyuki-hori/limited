@@ -103,9 +103,9 @@ export function DatePicker(props: Props) {
 
   return (
     <div class="flex items-center font-mono text-sm">
-      <DigitSelect value={yT()} options={[2]} onChange={setYT} />
-      <DigitSelect value={yH()} options={[0]} onChange={setYH} />
-      <DigitSelect value={yD()} options={range(2, 9)} onChange={setYD} />
+      <DigitSelect value={yT()} options={range(0, 9)} onChange={setYT} />
+      <DigitSelect value={yH()} options={range(0, 9)} onChange={setYH} />
+      <DigitSelect value={yD()} options={range(0, 9)} onChange={setYD} />
       <DigitSelect value={yU()} options={range(0, 9)} onChange={setYU} />
       <span class="text-text-tertiary mx-px">-</span>
       <DigitSelect value={moT()} options={range(0, 1)} onChange={setMoT} />
