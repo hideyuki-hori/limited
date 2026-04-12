@@ -1,5 +1,6 @@
 import { onMount } from 'solid-js'
-import { StoreCtx, ConfigCtx, Header, Carousel, Footer, initTheme } from '@limited/ui'
+import { StoreCtx, Header, Carousel, initTheme } from '@limited/ui'
+import { Footer } from '~/footer'
 import { storeContext, loadCountdowns } from '~/store'
 
 export function App() {
@@ -10,15 +11,13 @@ export function App() {
 
   return (
     <StoreCtx.Provider value={storeContext}>
-      <ConfigCtx.Provider value={{ showExtensionLink: false }}>
-        <div class="flex flex-col min-h-screen">
-          <Header />
-          <main class="flex-1 flex flex-col">
-            <Carousel />
-          </main>
-          <Footer />
-        </div>
-      </ConfigCtx.Provider>
+      <div class="flex flex-col min-h-screen">
+        <Header />
+        <main class="flex-1 flex flex-col">
+          <Carousel />
+        </main>
+        <Footer />
+      </div>
     </StoreCtx.Provider>
   )
 }

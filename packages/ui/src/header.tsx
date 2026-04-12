@@ -1,6 +1,6 @@
 import { type JSX, createSignal, Show } from 'solid-js'
 import { type ThemeMode, themeMode, setThemeMode } from './theme'
-import { useStore, useConfig } from './context'
+import { useStore } from './context'
 import { MAX_ITEMS } from '@limited/config'
 import { DatePicker } from './date-picker'
 import { padNum } from './countdown'

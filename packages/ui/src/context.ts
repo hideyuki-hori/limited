@@ -10,12 +10,7 @@ export interface StoreContext {
   removeCountdown: (id: string) => Promise<void>
 }
 
-export interface AppConfig {
-  showExtensionLink: boolean
-}
-
 const StoreCtx = createContext<StoreContext>()
-const ConfigCtx = createContext<AppConfig>({ showExtensionLink: false })
 
 export function useStore(): StoreContext {
   const ctx = useContext(StoreCtx)
@@ -23,8 +18,4 @@ export function useStore(): StoreContext {
   return ctx
 }
 
-export function useConfig(): AppConfig {
-  return useContext(ConfigCtx)!
-}
-
-export { StoreCtx, ConfigCtx }
+export { StoreCtx }

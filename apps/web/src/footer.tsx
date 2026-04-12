@@ -1,5 +1,4 @@
-import { Show } from 'solid-js'
-import { useConfig } from './context'
+import { Copyright } from '@limited/ui'
 
 function PuzzleIcon() {
   return (
@@ -8,29 +7,18 @@ function PuzzleIcon() {
 }
 
 export function Footer() {
-  const config = useConfig()
-
   return (
     <footer class="flex items-center justify-between h-12 px-4 md:px-10 border-t border-border-primary">
+      <Copyright />
       <a
-        href="https://github.com/hideyuki-hori/limited"
+        href="https://chromewebstore.google.com/detail/limited/aecdacgfdiefkkbialbpmgbnjficgmod"
         target="_blank"
         rel="noopener noreferrer"
-        class="font-body text-[10px] text-text-secondary hover:text-text-heading transition-colors"
+        class="flex items-center gap-1.5 text-text-secondary hover:text-text-heading transition-colors"
       >
-        &copy; hideyuki-hori
+        <PuzzleIcon />
+        <span class="font-body text-[10px]">chrome extension</span>
       </a>
-      <Show when={config.showExtensionLink}>
-        <a
-          href="https://chromewebstore.google.com/detail/limited/aecdacgfdiefkkbialbpmgbnjficgmod"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center gap-1.5 text-text-secondary hover:text-text-heading transition-colors"
-        >
-          <PuzzleIcon />
-          <span class="font-body text-[10px]">chrome extension</span>
-        </a>
-      </Show>
     </footer>
   )
 }
