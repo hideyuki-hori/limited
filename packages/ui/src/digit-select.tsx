@@ -63,22 +63,25 @@ export function DigitSelect(props: Props) {
         {props.value}
       </button>
       <Show when={open()}>
-        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-50 flex flex-col border border-border-primary bg-bg-page/95 backdrop-blur-sm rounded-sm shadow-lg shadow-shadow-card overflow-hidden">
-          <For each={props.options}>
-            {opt => (
-              <button
-                type="button"
-                onClick={() => handleSelect(opt)}
-                class="font-mono text-sm w-7 h-7 flex items-center justify-center transition-colors"
-                classList={{
-                  'text-accent bg-accent/15': opt === props.value,
-                  'text-text-secondary hover:text-text-primary hover:bg-accent/5': opt !== props.value,
-                }}
-              >
-                {opt}
-              </button>
-            )}
-          </For>
+        <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50">
+          <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-bg-page border-l border-t border-border-primary" />
+          <div class="relative flex border border-border-primary bg-bg-page/95 backdrop-blur-sm rounded-md shadow-lg shadow-shadow-card p-1 gap-0.5">
+            <For each={props.options}>
+              {opt => (
+                <button
+                  type="button"
+                  onClick={() => handleSelect(opt)}
+                  class="font-mono text-base w-8 h-9 shrink-0 flex items-center justify-center transition-colors rounded-sm"
+                  classList={{
+                    'text-accent bg-accent/15': opt === props.value,
+                    'text-text-secondary hover:text-text-primary hover:bg-accent/5': opt !== props.value,
+                  }}
+                >
+                  {opt}
+                </button>
+              )}
+            </For>
+          </div>
         </div>
       </Show>
     </div>
