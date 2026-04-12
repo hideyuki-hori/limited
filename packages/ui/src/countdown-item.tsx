@@ -122,12 +122,12 @@ export function CountdownCard(props: Props) {
   const units = () => {
     const t = tr()
     return [
-      { value: padYear(t.years), label: 'y', big: true, width: 'w-12' },
-      { value: padNum(t.months), label: 'm', big: true, width: 'w-8' },
-      { value: padNum(t.days), label: 'days', big: true, width: 'w-8' },
-      { value: padNum(t.hours), label: 'hrs', big: false, width: 'w-8' },
-      { value: padNum(t.minutes), label: 'min', big: false, width: 'w-8' },
-      { value: padNum(t.seconds), label: 'sec', big: false, width: 'w-8' },
+      { value: padYear(t.years), label: 'y', big: true },
+      { value: padNum(t.months), label: 'm', big: true },
+      { value: padNum(t.days), label: 'days', big: true },
+      { value: padNum(t.hours), label: 'hrs', big: false },
+      { value: padNum(t.minutes), label: 'min', big: false },
+      { value: padNum(t.seconds), label: 'sec', big: false },
     ]
   }
 
@@ -169,7 +169,7 @@ export function CountdownCard(props: Props) {
             {(u, i) => (
               <>
                 {i() > 0 && <span class="font-mono text-xl font-bold text-separator pb-3.5">:</span>}
-                <div class={`flex flex-col items-center gap-0.5 ${u.width}`}>
+                <div class="flex flex-col items-center gap-0.5">
                   <span
                     class="font-mono text-[28px] font-bold"
                     style={u.big ? GRADIENT_ACCENT : GRADIENT_HEADING}
