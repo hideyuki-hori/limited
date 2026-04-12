@@ -1,4 +1,5 @@
 import { createSignal, onCleanup, onMount, For, Show } from 'solid-js'
+import { Portal } from 'solid-js/web'
 import { calcTimeRemaining, padNum, padYear } from './countdown'
 import type { Countdown, TimeRemaining } from './types'
 import { useStore } from './context'
@@ -77,6 +78,21 @@ export function CountdownCard(props: Props) {
   const [editing, setEditing] = createSignal(false)
   const [draftStarted, setDraftStarted] = createSignal('')
   const [draftDeadline, setDraftDeadline] = createSignal('')
+  const [confirmDelete, setConfirmDelete] = createSignal(false)
+
+  function askDelete(e: MouseEvent) {
+    e.stopPropagation()
+    setConfirmDelete(true)
+  }
+
+  function cancelDelete() {
+    setConfirmDelete(false)
+  }
+
+  function confirmDeleteNow() {
+    removeCountdown(props.item.id)
+    setConfirmDelete(false)
+  }
 
   onMount(() => {
     const interval = setInterval(() => {
@@ -258,13 +274,41 @@ export function CountdownCard(props: Props) {
             </button>
           </Show>
           <button
-            onClick={() => removeCountdown(props.item.id)}
+            onClick={askDelete}
             class="text-text-secondary hover:text-text-heading transition-colors cursor-pointer"
           >
             <XIcon />
           </button>
         </div>
       </div>
+
+      <Show when={confirmDelete()}>
+        <Portal>
+          <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={cancelDelete}>
+            <div class="bg-bg-card border border-border-primary rounded-lg p-6 w-[400px] max-w-[90vw] flex flex-col gap-5" style={{ 'box-shadow': '0 16px 48px var(--color-shadow-card)' }} onClick={e => e.stopPropagation()}>
+              <span class="font-body text-xs text-text-secondary text-center">
+                「<span class="text-text-heading">{props.item.title}</span>」を削除しますか？
+              </span>
+              <div class="flex justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={cancelDelete}
+                  class="font-body text-xs text-text-secondary px-3 py-1.5 cursor-pointer"
+                >
+                  キャンセル
+                </button>
+                <button
+                  type="button"
+                  onClick={confirmDeleteNow}
+                  class="font-body text-xs font-medium text-btn-text bg-accent px-4 py-1.5 rounded cursor-pointer"
+                >
+                  削除
+                </button>
+              </div>
+            </div>
+          </div>
+        </Portal>
+      </Show>
     </div>
   )
 }
