@@ -98,14 +98,16 @@ export function Header() {
         </span>
         <div class="flex items-center gap-5">
           <div class="flex border border-border-primary rounded">
-            {modes.map(({ mode, icon }) => {
+            {modes.map(({ mode, icon }, i) => {
               const Icon = iconMap[icon]
               return (
                 <button
                   onClick={() => setThemeMode(mode)}
-                  class="flex items-center justify-center w-8 h-7 transition-colors rounded-sm cursor-pointer"
+                  class="flex items-center justify-center w-8 h-7 transition-colors cursor-pointer"
                   classList={{
                     'bg-accent': themeMode() === mode,
+                    'rounded-l-sm': i === 0,
+                    'rounded-r-sm': i === modes.length - 1,
                   }}
                 >
                   <Icon
