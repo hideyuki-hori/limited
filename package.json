@@ -6,7 +6,8 @@
     "build": "pnpm --filter @limited/web build && pnpm --filter @limited/extension build",
     "build:web": "pnpm --filter @limited/web build",
     "build:ext": "pnpm --filter @limited/extension build",
-    "deploy:web": "pnpm build:web && wrangler pages deploy apps/web/dist --project-name=limited --branch=main"
+    "deploy:web": "pnpm build:web && wrangler pages deploy apps/web/dist --project-name=limited --branch=main",
+    "deploy:ext": "pnpm build:ext && rm -f limited-extension.zip && cd apps/extension/dist && zip -r ../../../limited-extension.zip ."
   },
   "devDependencies": {
     "wrangler": "^4.81.1"
