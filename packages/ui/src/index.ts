@@ -1,5 +1,5 @@
 export { Header } from './header'
-export { CountdownCard } from './countdown-item'
+export { CountdownCard } from './countdown-card'
 export { Carousel } from './countdown-list'
 export { Copyright } from './copyright'
 export { DatePicker } from './date-picker'
