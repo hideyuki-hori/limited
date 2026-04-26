@@ -1,4 +1,4 @@
-import { For, Show, createSignal, createEffect, onMount, onCleanup } from 'solid-js'
+import { createEffect, createSignal, For, onCleanup, onMount, Show } from 'solid-js'
 import { useStore } from './context'
 import { CountdownCard } from './countdown-card'
 
@@ -51,7 +51,9 @@ export function Carousel() {
     wheelCooldown = true
     if (e.deltaY > 0) next()
     else prev()
-    setTimeout(() => { wheelCooldown = false }, 600)
+    setTimeout(() => {
+      wheelCooldown = false
+    }, 600)
   }
 
   onMount(() => {
@@ -83,7 +85,7 @@ export function Carousel() {
   return (
     <Show when={loaded() && countdowns().length > 0}>
       <div
-        class="relative w-full flex-1 overflow-hidden"
+        class='relative w-full flex-1 overflow-hidden'
         style={{ perspective: '1000px' }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -95,7 +97,10 @@ export function Carousel() {
             return (
               <Show when={Math.abs(offset()) <= 6}>
                 <div
-                  class="absolute left-1/2 top-1/2 transition-all duration-500 ease-out"
+                  role='button'
+                  tabIndex={0}
+                  aria-label={offset() !== 0 ? 'select card' : 'current card'}
+                  class='absolute left-1/2 top-1/2 transition-all duration-500 ease-out'
                   style={{
                     transform: `translate(-50%, -50%) ${cardTransform(offset())}`,
                     'z-index': cardZIndex(offset()),
@@ -105,6 +110,12 @@ export function Carousel() {
                   }}
                   onClick={() => {
                     if (offset() !== 0) setCurrent(i())
+                  }}
+                  onKeyDown={(e) => {
+                    if (offset() !== 0 && (e.key === 'Enter' || e.key === ' ')) {
+                      e.preventDefault()
+                      setCurrent(i())
+                    }
                   }}
                   classList={{
                     'cursor-pointer': offset() !== 0,

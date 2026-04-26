@@ -1,61 +1,66 @@
 @theme {
-  --font-title: 'Shippori Mincho', serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-body: 'IBM Plex Mono', monospace;
+  --font-title: "Shippori Mincho", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-body: "IBM Plex Mono", monospace;
 
-  --color-bg-page: #0A0A0F;
-  --color-bg-grad-mid: #0D0D14;
+  --color-bg-page: #0a0a0f;
+  --color-bg-grad-mid: #0d0d14;
   --color-bg-grad-end: #111118;
   --color-bg-card: #161620;
-  --color-bg-surface: #0D0D12;
-  --color-border-primary: #2A2520;
+  --color-bg-surface: #0d0d12;
+  --color-border-primary: #2a2520;
   --color-shadow-card: rgba(154, 132, 86, 0.2);
   --color-border-card-active: rgba(154, 132, 86, 0.25);
-  --color-text-heading: #C4B89A;
-  --color-text-heading-dim: #8A7E66;
-  --color-text-primary: #C4B89A;
-  --color-text-secondary: #6B6252;
-  --color-text-tertiary: #554E3E;
-  --color-text-meta: #5E5648;
-  --color-accent: #9A8456;
-  --color-accent-bright: #B8A070;
-  --color-accent-dim: #7A6A42;
-  --color-progress-bg: #1A1814;
-  --color-progress-start: #8B7340;
-  --color-progress-end: #9A8456;
-  --color-btn-text: #0D0D12;
-  --color-separator: #2A2520;
+  --color-text-heading: #c4b89a;
+  --color-text-heading-dim: #8a7e66;
+  --color-text-primary: #c4b89a;
+  --color-text-secondary: #6b6252;
+  --color-text-tertiary: #554e3e;
+  --color-text-meta: #5e5648;
+  --color-accent: #9a8456;
+  --color-accent-bright: #b8a070;
+  --color-accent-dim: #7a6a42;
+  --color-progress-bg: #1a1814;
+  --color-progress-start: #8b7340;
+  --color-progress-end: #9a8456;
+  --color-btn-text: #0d0d12;
+  --color-separator: #2a2520;
 }
 
 :root.light {
-  --color-bg-page: #F0F2F8;
-  --color-bg-grad-mid: #E0E4EE;
-  --color-bg-grad-end: #D8DCE8;
-  --color-bg-card: #FAFBFE;
-  --color-bg-surface: #FAFBFE;
+  --color-bg-page: #f0f2f8;
+  --color-bg-grad-mid: #e0e4ee;
+  --color-bg-grad-end: #d8dce8;
+  --color-bg-card: #fafbfe;
+  --color-bg-surface: #fafbfe;
   --color-border-primary: rgba(0, 0, 0, 0.08);
   --color-border-card-active: rgba(196, 30, 58, 0.19);
   --color-shadow-card: rgba(208, 48, 80, 0.25);
-  --color-text-heading: #1A1A2E;
-  --color-text-heading-dim: #3A3A50;
-  --color-text-primary: #1A1A2E;
-  --color-text-secondary: #A0A4B0;
-  --color-text-tertiary: #C8CCD4;
-  --color-text-meta: #A8ADB8;
-  --color-accent: #C41E3A;
-  --color-accent-bright: #D03050;
-  --color-accent-dim: #8A1528;
-  --color-progress-bg: #E8E0E4;
-  --color-progress-start: #D03050;
-  --color-progress-end: #C41E3A;
-  --color-btn-text: #FFFFFF;
-  --color-separator: #E8E0E4;
+  --color-text-heading: #1a1a2e;
+  --color-text-heading-dim: #3a3a50;
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #a0a4b0;
+  --color-text-tertiary: #c8ccd4;
+  --color-text-meta: #a8adb8;
+  --color-accent: #c41e3a;
+  --color-accent-bright: #d03050;
+  --color-accent-dim: #8a1528;
+  --color-progress-bg: #e8e0e4;
+  --color-progress-start: #d03050;
+  --color-progress-end: #c41e3a;
+  --color-btn-text: #ffffff;
+  --color-separator: #e8e0e4;
 }
 
 body {
   margin: 0;
-  font-family: 'IBM Plex Mono', monospace;
-  background: linear-gradient(to bottom, var(--color-bg-page), var(--color-bg-grad-mid), var(--color-bg-grad-end));
+  font-family: "IBM Plex Mono", monospace;
+  background: linear-gradient(
+    to bottom,
+    var(--color-bg-page),
+    var(--color-bg-grad-mid),
+    var(--color-bg-grad-end)
+  );
   min-height: 100vh;
   color: var(--color-text-primary);
 }
