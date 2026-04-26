@@ -1,6 +1,6 @@
 import { For, Show, createSignal, createEffect, onMount, onCleanup } from 'solid-js'
 import { useStore } from './context'
-import { CountdownCard } from './countdown-item'
+import { CountdownCard } from './countdown-card'
 
 export function Carousel() {
   const { countdowns, loaded } = useStore()
