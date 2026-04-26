@@ -10,10 +10,14 @@
     "deploy:ext": "pnpm build:ext && rm -f limited-extension.zip && cd apps/extension/dist && zip -r ../../../limited-extension.zip .",
     "format": "biome format --write .",
     "lint": "biome lint .",
-    "check": "biome check --write ."
+    "check": "biome check --write .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.13",
+    "happy-dom": "20.9.0",
+    "vitest": "4.1.5",
     "wrangler": "^4.81.1"
   }
 }
