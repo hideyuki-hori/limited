@@ -1,6 +1,6 @@
-import { createSignal } from 'solid-js'
-import { STORAGE_KEY, MAX_ITEMS, generateId } from '@limited/config'
+import { generateId, MAX_ITEMS, STORAGE_KEY } from '@limited/config'
 import type { Countdown, StoreContext } from '@limited/ui'
+import { createSignal } from 'solid-js'
 
 const [countdowns, setCountdowns] = createSignal<Countdown[]>([])
 const [loaded, setLoaded] = createSignal(false)
@@ -8,10 +8,12 @@ const [loaded, setLoaded] = createSignal(false)
 export async function loadCountdowns() {
   const result = await chrome.storage.local.get(STORAGE_KEY)
   const items: Countdown[] = result[STORAGE_KEY] ?? []
-  setCountdowns(items.map(c => ({
-    ...c,
-    startedAt: c.startedAt || Date.now(),
-  })))
+  setCountdowns(
+    items.map((c) => ({
+      ...c,
+      startedAt: c.startedAt || Date.now(),
+    })),
+  )
   setLoaded(true)
 }
 
@@ -27,14 +29,17 @@ async function addCountdown(title: string, deadline: number, startedAt: number):
   return true
 }
 
-async function updateCountdown(id: string, data: { title?: string; deadline?: number; startedAt?: number }) {
-  const next = countdowns().map(c => c.id === id ? { ...c, ...data } : c)
+async function updateCountdown(
+  id: string,
+  data: { title?: string; deadline?: number; startedAt?: number },
+) {
+  const next = countdowns().map((c) => (c.id === id ? { ...c, ...data } : c))
   setCountdowns(next)
   await save(next)
 }
 
 async function removeCountdown(id: string) {
-  const next = countdowns().filter(c => c.id !== id)
+  const next = countdowns().filter((c) => c.id !== id)
   setCountdowns(next)
   await save(next)
 }

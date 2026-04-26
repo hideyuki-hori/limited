@@ -1,13 +1,13 @@
-import { Show, createSignal, onCleanup, onMount } from 'solid-js'
-import { calcTimeRemaining } from '../countdown'
-import type { Countdown, TimeRemaining } from '../types'
+import { createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { useStore } from '../context'
+import { calcTimeRemaining } from '../countdown'
 import { CheckIcon, PenIcon, TimerIcon, XIcon } from '../icons'
-import { EditableTitle } from './editable-title'
-import { TimeDisplay } from './time-display'
-import { ProgressBar } from './progress-bar'
+import type { Countdown, TimeRemaining } from '../types'
 import { DateRangeEditor } from './date-range-editor'
 import { DeleteConfirmDialog } from './delete-confirm-dialog'
+import { EditableTitle } from './editable-title'
+import { ProgressBar } from './progress-bar'
+import { TimeDisplay } from './time-display'
 import { consumed, elapsedDays, formatDateISO } from './utils'
 
 interface Props {
@@ -22,6 +22,7 @@ export function CountdownCard(props: Props) {
   const [draftStarted, setDraftStarted] = createSignal('')
   const [draftDeadline, setDraftDeadline] = createSignal('')
   const [confirmDelete, setConfirmDelete] = createSignal(false)
+  let cardRef: HTMLDivElement | undefined
 
   onMount(() => {
     const interval = setInterval(() => {
@@ -30,33 +31,47 @@ export function CountdownCard(props: Props) {
     onCleanup(() => clearInterval(interval))
   })
 
+  onMount(() => {
+    function handleDocPointerDown(e: PointerEvent) {
+      if (!editing()) return
+      const target = e.target as Node | null
+      if (target && cardRef && !cardRef.contains(target)) {
+        setEditing(false)
+      }
+    }
+    function handleDocKeyDown(e: KeyboardEvent) {
+      if (editing() && e.key === 'Escape') {
+        setEditing(false)
+      }
+    }
+    document.addEventListener('pointerdown', handleDocPointerDown)
+    document.addEventListener('keydown', handleDocKeyDown)
+    onCleanup(() => {
+      document.removeEventListener('pointerdown', handleDocPointerDown)
+      document.removeEventListener('keydown', handleDocKeyDown)
+    })
+  })
+
   function saveTitle(next: string) {
     return updateCountdown(props.item.id, { title: next })
   }
 
-  function startEditing(e: MouseEvent) {
-    e.stopPropagation()
+  function startEditing() {
     setDraftStarted(formatDateISO(props.item.startedAt))
     setDraftDeadline(formatDateISO(props.item.deadline))
     setEditing(true)
   }
 
-  function confirmEditing(e: MouseEvent) {
-    e.stopPropagation()
+  function confirmEditing() {
     const sTs = new Date(draftStarted()).getTime()
     const dTs = new Date(draftDeadline()).getTime()
-    if (!isNaN(sTs) && !isNaN(dTs) && sTs < dTs) {
+    if (!Number.isNaN(sTs) && !Number.isNaN(dTs) && sTs < dTs) {
       updateCountdown(props.item.id, { startedAt: sTs, deadline: dTs })
     }
     setEditing(false)
   }
 
-  function cancelEditing() {
-    setEditing(false)
-  }
-
-  function askDelete(e: MouseEvent) {
-    e.stopPropagation()
+  function askDelete() {
     setConfirmDelete(true)
   }
 
@@ -73,9 +88,9 @@ export function CountdownCard(props: Props) {
 
   return (
     <div
+      ref={cardRef}
       class='flex flex-col rounded-xl border transition-all w-[400px] bg-bg-card border-border-primary'
       style={{ padding: '24px 0 12px 0', 'box-shadow': '0 8px 32px var(--color-shadow-card)' }}
-      onClick={cancelEditing}
     >
       <div class='flex flex-col gap-[18px] px-6'>
         <EditableTitle title={props.item.title} onSave={saveTitle} />
@@ -102,6 +117,7 @@ export function CountdownCard(props: Props) {
             when={editing()}
             fallback={
               <button
+                type='button'
                 onClick={startEditing}
                 class='text-text-secondary hover:text-text-heading transition-colors cursor-pointer'
               >
@@ -110,6 +126,7 @@ export function CountdownCard(props: Props) {
             }
           >
             <button
+              type='button'
               onClick={confirmEditing}
               class='text-accent hover:text-text-heading transition-colors cursor-pointer'
             >
@@ -117,6 +134,7 @@ export function CountdownCard(props: Props) {
             </button>
           </Show>
           <button
+            type='button'
             onClick={askDelete}
             class='text-text-secondary hover:text-text-heading transition-colors cursor-pointer'
           >

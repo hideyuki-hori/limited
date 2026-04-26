@@ -1,7 +1,7 @@
+import { Carousel, Header, initTheme, StoreCtx } from '@limited/ui'
 import { onMount } from 'solid-js'
-import { StoreCtx, Header, Carousel, initTheme } from '@limited/ui'
 import { Footer } from '~/footer'
-import { storeContext, loadCountdowns } from '~/store'
+import { loadCountdowns, storeContext } from '~/store'
 
 export function App() {
   onMount(() => {
@@ -11,9 +11,9 @@ export function App() {
 
   return (
     <StoreCtx.Provider value={storeContext}>
-      <div class="flex flex-col min-h-screen">
+      <div class='flex flex-col min-h-screen'>
         <Header />
-        <main class="flex-1 flex flex-col">
+        <main class='flex-1 flex flex-col'>
           <Carousel />
         </main>
         <Footer />

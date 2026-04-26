@@ -1,4 +1,4 @@
-import { Show, createSignal } from 'solid-js'
+import { createSignal, Show } from 'solid-js'
 import { GRADIENT_HEADING } from './utils'
 
 interface Props {
@@ -32,22 +32,25 @@ export function EditableTitle(props: Props) {
     <Show
       when={editing()}
       fallback={
-        <span
-          class='font-title text-sm font-bold text-center truncate cursor-text'
+        <button
+          type='button'
+          class='font-title text-sm font-bold text-center truncate cursor-text bg-transparent border-0 p-0'
           style={GRADIENT_HEADING}
           onClick={startEdit}
         >
           {props.title}
-        </span>
+        </button>
       }
     >
       <input
         type='text'
         maxLength={40}
         value={draft()}
-        onInput={e => setDraft(e.currentTarget.value)}
+        onInput={(e) => setDraft(e.currentTarget.value)}
         onBlur={commit}
-        onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') e.currentTarget.blur()
+        }}
         class='bg-transparent font-title text-sm font-bold text-center text-text-heading outline-none border-b-2 border-accent/30 pb-1'
         autofocus
       />

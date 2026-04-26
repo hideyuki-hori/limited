@@ -28,11 +28,11 @@ export function DateRangeEditor(props: Props) {
           </div>
         }
       >
-        <div class='flex items-center justify-between' onClick={e => e.stopPropagation()}>
+        <div class='flex items-center justify-between'>
           <span class='font-body text-[10px] text-accent shrink-0'>started:</span>
           <DatePicker value={props.draftStarted} onChange={props.onChangeStarted} />
         </div>
-        <div class='flex items-center justify-between' onClick={e => e.stopPropagation()}>
+        <div class='flex items-center justify-between'>
           <span class='font-body text-[10px] text-accent shrink-0'>deadline:</span>
           <DatePicker value={props.draftDeadline} onChange={props.onChangeDeadline} />
         </div>

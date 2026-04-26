@@ -18,7 +18,8 @@ export function ProgressBar(props: Props) {
           class='h-full rounded-sm'
           style={{
             width: `${props.pct}%`,
-            background: 'linear-gradient(to right, var(--color-progress-start), var(--color-progress-end))',
+            background:
+              'linear-gradient(to right, var(--color-progress-start), var(--color-progress-end))',
           }}
         />
       </div>

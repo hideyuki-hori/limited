@@ -1,31 +1,90 @@
-import { type JSX, createSignal, Show } from 'solid-js'
-import { type ThemeMode, themeMode, setThemeMode } from './theme'
-import { useStore } from './context'
 import { MAX_ITEMS } from '@limited/config'
-import { DatePicker } from './date-picker'
+import { createSignal, type JSX, Show } from 'solid-js'
+import { useStore } from './context'
 import { padNum } from './countdown'
+import { DatePicker } from './date-picker'
+import { setThemeMode, type ThemeMode, themeMode } from './theme'
 
 function SunIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" {...props}><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+    <svg
+      aria-hidden='true'
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      {...props}
+    >
+      <circle cx='12' cy='12' r='4' />
+      <path d='M12 2v2' />
+      <path d='M12 20v2' />
+      <path d='m4.93 4.93 1.41 1.41' />
+      <path d='m17.66 17.66 1.41 1.41' />
+      <path d='M2 12h2' />
+      <path d='M20 12h2' />
+      <path d='m6.34 17.66-1.41 1.41' />
+      <path d='m19.07 4.93-1.41 1.41' />
+    </svg>
   )
 }
 
 function MonitorIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" {...props}><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+    <svg
+      aria-hidden='true'
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      {...props}
+    >
+      <rect width='20' height='14' x='2' y='3' rx='2' />
+      <line x1='8' x2='16' y1='21' y2='21' />
+      <line x1='12' x2='12' y1='17' y2='21' />
+    </svg>
   )
 }
 
 function MoonIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" {...props}><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+    <svg
+      aria-hidden='true'
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      {...props}
+    >
+      <path d='M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' />
+    </svg>
   )
 }
 
 function PlusIcon(props: JSX.SvgSVGAttributes<SVGSVGElement>) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" {...props}><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+    <svg
+      aria-hidden='true'
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      {...props}
+    >
+      <path d='M5 12h14' />
+      <path d='M12 5v14' />
+    </svg>
   )
 }
 
@@ -75,7 +134,7 @@ export function Header() {
     if (!t || !s || !d) return
     const sTs = new Date(s).getTime()
     const dTs = new Date(d).getTime()
-    if (isNaN(sTs) || isNaN(dTs) || sTs >= dTs) return
+    if (Number.isNaN(sTs) || Number.isNaN(dTs) || sTs >= dTs) return
     const ok = await addCountdown(t, dTs, sTs)
     if (ok) {
       setDialogOpen(false)
@@ -84,11 +143,12 @@ export function Header() {
 
   return (
     <>
-      <header class="flex items-center justify-between h-14 px-4 md:px-10 border-b border-border-primary">
+      <header class='flex items-center justify-between h-14 px-4 md:px-10 border-b border-border-primary'>
         <span
-          class="font-title text-xl font-bold"
+          class='font-title text-xl font-bold'
           style={{
-            background: 'linear-gradient(to right, var(--color-text-heading), var(--color-text-heading-dim))',
+            background:
+              'linear-gradient(to right, var(--color-text-heading), var(--color-text-heading-dim))',
             '-webkit-background-clip': 'text',
             '-webkit-text-fill-color': 'transparent',
             'background-clip': 'text',
@@ -96,14 +156,15 @@ export function Header() {
         >
           limited
         </span>
-        <div class="flex items-center gap-5">
-          <div class="flex border border-border-primary rounded">
+        <div class='flex items-center gap-5'>
+          <div class='flex border border-border-primary rounded'>
             {modes.map(({ mode, icon }, i) => {
               const Icon = iconMap[icon]
               return (
                 <button
+                  type='button'
                   onClick={() => setThemeMode(mode)}
-                  class="flex items-center justify-center w-8 h-7 transition-colors cursor-pointer"
+                  class='flex items-center justify-center w-8 h-7 transition-colors cursor-pointer'
                   classList={{
                     'bg-accent': themeMode() === mode,
                     'rounded-l-sm': i === 0,
@@ -111,7 +172,7 @@ export function Header() {
                   }}
                 >
                   <Icon
-                    class="w-3.5 h-3.5"
+                    class='w-3.5 h-3.5'
                     classList={{
                       'text-btn-text': themeMode() === mode,
                       'text-text-tertiary': themeMode() !== mode,
@@ -122,53 +183,69 @@ export function Header() {
             })}
           </div>
           <button
+            type='button'
             onClick={openDialog}
             disabled={countdowns().length >= MAX_ITEMS}
-            class="flex items-center gap-1.5 px-3.5 py-1.5 border border-accent rounded text-accent font-body text-xs font-medium transition-opacity disabled:opacity-40 cursor-pointer disabled:cursor-default"
+            class='flex items-center gap-1.5 px-3.5 py-1.5 border border-accent rounded text-accent font-body text-xs font-medium transition-opacity disabled:opacity-40 cursor-pointer disabled:cursor-default'
           >
-            <PlusIcon class="w-3.5 h-3.5" />
+            <PlusIcon class='w-3.5 h-3.5' />
             add
           </button>
         </div>
       </header>
 
       <Show when={dialogOpen()}>
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setDialogOpen(false)}>
-          <div class="bg-bg-card border border-border-primary rounded-lg p-6 w-[400px] max-w-[90vw] flex flex-col gap-5" style={{ 'box-shadow': '0 16px 48px var(--color-shadow-card)' }} onClick={e => e.stopPropagation()}>
-            <span class="font-title text-sm font-bold text-text-heading">add countdown</span>
-            <form onSubmit={handleSubmit} class="flex flex-col gap-4">
+        <button
+          type='button'
+          aria-label='close dialog'
+          class='fixed inset-0 z-50 bg-black/60 backdrop-blur-sm cursor-default border-0 p-0'
+          onClick={() => setDialogOpen(false)}
+        />
+        <div
+          role='dialog'
+          aria-modal='true'
+          class='fixed inset-0 z-50 flex items-center justify-center pointer-events-none'
+        >
+          <div
+            class='bg-bg-card border border-border-primary rounded-lg p-6 w-[400px] max-w-[90vw] flex flex-col gap-5 pointer-events-auto'
+            style={{ 'box-shadow': '0 16px 48px var(--color-shadow-card)' }}
+          >
+            <span class='font-title text-sm font-bold text-text-heading'>add countdown</span>
+            <form onSubmit={handleSubmit} class='flex flex-col gap-4'>
               <input
-                type="text"
-                placeholder="title"
+                type='text'
+                placeholder='title'
                 maxLength={40}
                 value={title()}
-                onInput={e => setTitle(e.currentTarget.value)}
-                class="bg-transparent font-title text-sm text-text-heading placeholder:text-text-tertiary outline-none border-b border-border-primary pb-2 focus:border-accent transition-colors"
+                onInput={(e) => setTitle(e.currentTarget.value)}
+                class='bg-transparent font-title text-sm text-text-heading placeholder:text-text-tertiary outline-none border-b border-border-primary pb-2 focus:border-accent transition-colors'
                 autofocus
               />
-              <div class="flex items-center justify-between border-b border-border-primary pb-2">
-                <span class="font-body text-xs text-text-secondary shrink-0">started</span>
+              <div class='flex items-center justify-between border-b border-border-primary pb-2'>
+                <span class='font-body text-xs text-text-secondary shrink-0'>started</span>
                 <DatePicker value={started()} onChange={setStarted} />
               </div>
-              <div class="flex items-center justify-between border-b border-border-primary pb-2">
-                <span class="font-body text-xs text-text-secondary shrink-0">deadline</span>
+              <div class='flex items-center justify-between border-b border-border-primary pb-2'>
+                <span class='font-body text-xs text-text-secondary shrink-0'>deadline</span>
                 <DatePicker value={deadline()} onChange={setDeadline} />
               </div>
               <Show when={started() && deadline() && !dateValid()}>
-                <span class="font-body text-[10px] text-accent">started must be before deadline</span>
+                <span class='font-body text-[10px] text-accent'>
+                  started must be before deadline
+                </span>
               </Show>
-              <div class="flex justify-end gap-3 pt-2">
+              <div class='flex justify-end gap-3 pt-2'>
                 <button
-                  type="button"
+                  type='button'
                   onClick={() => setDialogOpen(false)}
-                  class="font-body text-xs text-text-secondary px-3 py-1.5"
+                  class='font-body text-xs text-text-secondary px-3 py-1.5'
                 >
                   cancel
                 </button>
                 <button
-                  type="submit"
+                  type='submit'
                   disabled={!title().trim() || !dateValid()}
-                  class="font-body text-xs font-medium text-btn-text bg-accent px-4 py-1.5 rounded disabled:opacity-40"
+                  class='font-body text-xs font-medium text-btn-text bg-accent px-4 py-1.5 rounded disabled:opacity-40'
                 >
                   add
                 </button>

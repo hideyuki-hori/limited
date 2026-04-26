@@ -7,7 +7,16 @@ export function calcTimeRemaining(deadline: number): TimeRemaining {
   const diff = deadline - now
 
   if (diff <= 0) {
-    return { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0, expired: true, urgent: false }
+    return {
+      years: 0,
+      months: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      expired: true,
+      urgent: false,
+    }
   }
 
   const urgent = diff < URGENT_THRESHOLD_MS
