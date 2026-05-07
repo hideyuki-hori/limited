@@ -9,7 +9,9 @@ export function consumed(startedAt: number, deadline: number): number {
   const total = deadline - startedAt
   if (total <= 0) return 100
   const passed = Date.now() - startedAt
-  return Math.min(100, Math.max(0, Math.round((passed / total) * 100)))
+  if (passed <= 0) return 0
+  if (passed >= total) return 100
+  return Math.min(99, Math.floor((passed / total) * 100))
 }
 
 export function formatDate(ts: number): string {
